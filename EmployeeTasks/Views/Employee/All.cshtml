@@ -1,0 +1,45 @@
+﻿@model IEnumerable<EmployeeModel>
+
+@{
+    ViewBag.Title = "All Employees";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th><label>Full Name</label></th>
+            <th><label>Email</label></th>
+            <th><label>Phone Number</label></th>
+            <th><label>Date of Birth</label></th>
+            <th><label>Salary</label></th>
+            <th><label>Actions</label></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td><label>FullName</label></td>
+                    <td><label>Email</label></td>
+                    <td><label>Phone Number</label></td>
+                    <td><label>Date of Birth</label></td>
+                    <td><label>Salary</label></td>
+                    <td>
+                        <form asp-controller="Employee" asp-action="Delete" method="post" asp-route-id="Id">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <h3 class="text-center">No any Employees Added</h3>
+        }
+    </tbody>
+</table>

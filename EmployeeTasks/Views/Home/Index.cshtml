@@ -3,6 +3,33 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to Employee Tasks control page</h1>
+    
+    <h3 class="text-center">Employee actions</h3>
+    <ul>
+        <li class="nav-item">
+            <div class="card" style="width: 18rem;">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="All">Show All Employees</a>
+            </div>
+        </li>
+        <li class="nav-item">
+            <div class="card" style="width: 18rem;">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Add">Add Employee</a>
+            </div>
+        </li>
+    </ul>
+    
+    <h3 class="text-center">Task actions</h3>
+    <ul>
+        <li class="nav-item">
+            <div class="card" style="width: 18rem;">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Task" asp-action="All">Show All Tasks</a>
+            </div>
+        </li>
+        <li class="nav-item">
+            <div class="card" style="width: 18rem;">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Task" asp-action="Add">Add Task</a>
+            </div>
+        </li>
+    </ul>
 </div>
