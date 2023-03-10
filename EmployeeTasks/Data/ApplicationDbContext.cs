@@ -12,8 +12,8 @@ namespace EmployeeTasks.Data
         {
         }
 
-        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Employee>? Employees { get; set; }
 
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<Task>? Tasks { get; set; }
     }
 }

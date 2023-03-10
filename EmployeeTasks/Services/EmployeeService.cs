@@ -1,6 +1,7 @@
 ﻿namespace EmployeeTasks.Services
 {
     using Contracts;
+    using Data;
     using Data.Entities;
     using Data.Common;
     using Microsoft.EntityFrameworkCore;
@@ -10,17 +11,19 @@
     public class EmployeeService : IEmployeeService
     {
         private readonly IRepository repo;
+        private readonly ApplicationDbContext data;
 
-        public EmployeeService(IRepository _repo)
+        public EmployeeService(IRepository _repo, ApplicationDbContext _data)
         {
             repo = _repo;
+            data = _data;
         }
 
         public async Task<IEnumerable<EmployeeModel>> GetAll()
         {
-            var allEmployees = await repo
-                .AllReadonly<Employee>()
-                .Select(e => new EmployeeModel()
+            var allEmployees = await repo.AllReadonly<Employee>()
+                .Where(e => e.IsActive)
+                .Select(e => new EmployeeModel
                 {
                     Id = e.Id,
                     FullName = e.FullName,
@@ -28,8 +31,19 @@
                     PhoneNumber = e.PhoneNumber,
                     BirthDate = e.BirthDate,
                     Salary = e.Salary,
-                    CompletedTasks = e.CompletedTasks
+                    CompletedTasks = new List<Data.Entities.Task>()
                 }).ToListAsync();
+
+            //var allEmployees = data.Employees
+            //    .Select(e => new EmployeeModel
+            //    {
+            //        Id = e.Id,
+            //        FullName = e.FullName,
+            //        EmailAddress = e.EmailAddress,
+            //        PhoneNumber = e.PhoneNumber,
+            //        BirthDate = e.BirthDate,
+            //        Salary = e.Salary
+            //    }).ToList();
 
             return allEmployees;
         }

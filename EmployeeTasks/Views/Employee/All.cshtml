@@ -21,16 +21,16 @@
     <tbody>
         @if (Model.Any())
         {
-            @foreach (var user in Model)
+            @foreach (var employee in Model)
             {
                 <tr>
-                    <td><label>FullName</label></td>
-                    <td><label>Email</label></td>
-                    <td><label>Phone Number</label></td>
-                    <td><label>Date of Birth</label></td>
-                    <td><label>Salary</label></td>
+                    <td><label>@employee.FullName</label></td>
+                    <td><label>@employee.EmailAddress</label></td>
+                    <td><label>@employee.PhoneNumber</label></td>
+                    <td><label>@employee.BirthDate</label></td>
+                    <td><label>@employee.Salary</label></td>
                     <td>
-                        <form asp-controller="Employee" asp-action="Delete" method="post" asp-route-id="Id">
+                        <form asp-controller="Employee" asp-action="Delete" method="post" asp-route-id="@employee.Id">
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </td>

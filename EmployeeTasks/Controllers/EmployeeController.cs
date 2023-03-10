@@ -1,9 +1,11 @@
 ﻿namespace EmployeeTasks.Controllers
 {
     using Contracts;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Models.Employee;
 
+    [AllowAnonymous]
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService employeeService;
@@ -16,6 +18,11 @@
         public async Task<IActionResult> All()
         {
             IEnumerable<EmployeeModel> allEmployees = await employeeService.GetAll();
+
+            if (allEmployees == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
 
             return View(allEmployees);
         }
