@@ -11,12 +11,10 @@
     public class EmployeeService : IEmployeeService
     {
         private readonly IRepository repo;
-        private readonly ApplicationDbContext data;
 
         public EmployeeService(IRepository _repo, ApplicationDbContext _data)
         {
             repo = _repo;
-            data = _data;
         }
 
         public async Task<IEnumerable<EmployeeModel>> GetAll()
@@ -33,18 +31,7 @@
                     Salary = e.Salary,
                     CompletedTasks = new List<Data.Entities.Task>()
                 }).ToListAsync();
-
-            //var allEmployees = data.Employees
-            //    .Select(e => new EmployeeModel
-            //    {
-            //        Id = e.Id,
-            //        FullName = e.FullName,
-            //        EmailAddress = e.EmailAddress,
-            //        PhoneNumber = e.PhoneNumber,
-            //        BirthDate = e.BirthDate,
-            //        Salary = e.Salary
-            //    }).ToList();
-
+            
             return allEmployees;
         }
 
