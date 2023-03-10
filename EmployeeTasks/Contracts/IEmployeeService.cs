@@ -13,5 +13,7 @@
         Task Edit(int id, EmployeeModel model);
 
         Task<bool> Exist(int id);
+
+        Task Delete(int id);
     }
 }

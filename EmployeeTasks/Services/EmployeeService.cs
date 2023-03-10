@@ -90,5 +90,14 @@
                 .Where(e => e.IsActive)
                 .AnyAsync(e => e.Id == id);
         }
+
+        public async Task Delete(int id)
+        {
+            var employee = await repo.GetByIdAsync<Employee>(id);
+
+            employee.IsActive = false;
+
+            await repo.SaveChangesAsync();
+        }
     }
 }

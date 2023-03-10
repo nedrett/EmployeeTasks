@@ -84,5 +84,13 @@
 
             return RedirectToAction(nameof(All));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete([FromForm] int id)
+        {
+            await employeeService.Delete(id);
+
+            return RedirectToAction(nameof(All));
+        }
     }
 }
