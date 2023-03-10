@@ -9,7 +9,8 @@ namespace EmployeeTasks.Models.Employee
     using Data.Entities;
 
     public class EmployeeModel
-    { public int Id { get; set; }
+    { 
+        public int Id { get; set; }
 
         [Required]
         [StringLength(FullNameMaxLength, MinimumLength = FullNameMinLength)]

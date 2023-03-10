@@ -30,6 +30,10 @@
                     <td><label>@employee.BirthDate</label></td>
                     <td><label>@employee.Salary</label></td>
                     <td>
+                        <a class="btn btn-warning" asp-controller="Employee" asp-action="Edit" asp-route-id="@employee.Id">Edit</a>
+                        @*<form asp-controller="Employee" asp-action="Edit" asp-route-id="@employee.Id">
+                            <button type="submit" class="btn btn-warning">Delete</button>
+                        </form>*@
                         <form asp-controller="Employee" asp-action="Delete" method="post" asp-route-id="@employee.Id">
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
