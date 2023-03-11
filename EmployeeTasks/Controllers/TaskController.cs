@@ -3,47 +3,47 @@
     using Contracts;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Models.Employee;
+    using Models.Task;
 
     [AllowAnonymous]
-    public class EmployeeController : Controller
+    public class TaskController : Controller
     {
-        private readonly IEmployeeService employeeService;
+        private readonly ITaskService taskService;
 
-        public EmployeeController(IEmployeeService _employeeService)
+        public TaskController(ITaskService _taskService)
         {
-            employeeService = _employeeService;
+            taskService = _taskService;
         }
 
         public async Task<IActionResult> All()
         {
-            IEnumerable<EmployeeModel> allEmployees = await employeeService.GetAll();
+            IEnumerable<TaskModel> allTasks = await taskService.GetAll();
 
-            if (allEmployees == null)
+            if (allTasks == null)
             {
                 return RedirectToAction("Index", "Home");
             }
 
-            return View(allEmployees);
+            return View(allTasks);
         }
 
         [HttpGet]
         public IActionResult Add()
         {
-            var model = new EmployeeModel();
+            var model = new TaskModel();
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(EmployeeModel model)
+        public async Task<IActionResult> Add(TaskModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            await employeeService.Add(model);
+            await taskService.Add(model);
 
             return RedirectToAction(nameof(All));
         }
@@ -51,36 +51,35 @@
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            if (await employeeService.Exist(id) == false)
+            if (await taskService.Exist(id) == false)
             {
                 return RedirectToAction(nameof(All));
             }
 
-            var employee = await employeeService.GetById(id);
+            var task = await taskService.GetById(id);
 
-            var model = new EmployeeModel
+            var model = new TaskModel
             {
-                Id = employee.Id,
-                FullName = employee.FullName,
-                EmailAddress = employee.EmailAddress,
-                PhoneNumber = employee.PhoneNumber,
-                BirthDate = employee.BirthDate,
-                Salary = employee.Salary,
-                CompletedTasks = employee.CompletedTasks
+                Id = task.Id,
+                Title = task.Title,
+                Description = task.Description,
+                DueDate = task.DueDate,
+                AssigneeId = task.AssigneeId,
+                Assignee = task.Assignee,
             };
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(EmployeeModel model)
+        public async Task<IActionResult> Edit(TaskModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            await employeeService.Edit(model.Id, model);
+            await taskService.Edit(model.Id, model);
 
             return RedirectToAction(nameof(All));
         }
@@ -88,7 +87,7 @@
         [HttpPost]
         public async Task<IActionResult> Delete([FromForm] int id)
         {
-            await employeeService.Delete(id);
+            await taskService.Delete(id);
 
             return RedirectToAction(nameof(All));
         }

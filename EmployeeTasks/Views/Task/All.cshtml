@@ -1,0 +1,45 @@
+﻿@model IEnumerable<TaskModel>
+
+@{
+    ViewBag.Title = "All Tasks";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<table class="table table-striped">
+    @if (Model.Any())
+    {
+        <thead>
+            <tr>
+                <th><label>Title</label></th>
+                <th><label>Description</label></th>
+                <th><label>Due Date</label></th>
+                <th><label>Assignee Name</label></th>
+                <th><label>Actions</label></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in Model)
+            {
+                <tr>
+                    <td><label>@task.Title</label></td>
+                    <td><label>@task.Description</label></td>
+                    <td><label>@task.DueDate.ToShortDateString()</label></td>
+                    <td><label>@task.Assignee?.FullName</label></td>
+                    <td>
+                        <a class="btn btn-warning" asp-controller="Task" asp-action="Edit" asp-route-id="@task.Id">Edit</a>
+                        <form asp-controller="Task" asp-action="Delete" method="post" asp-route-id="@task.Id" onclick="return confirm('Are You sure to delete @task.Title')">
+                            <input name="id" type="hidden" value="@task.Id" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    }
+    else
+    {
+        <h3 class="text-center">No any Tasks Added</h3>
+    }
+</table>

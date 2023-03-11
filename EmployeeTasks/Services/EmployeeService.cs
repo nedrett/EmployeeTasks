@@ -1,9 +1,8 @@
 ﻿namespace EmployeeTasks.Services
 {
     using Contracts;
-    using Data;
-    using Data.Entities;
     using Data.Common;
+    using Data.Entities;
     using Microsoft.EntityFrameworkCore;
     using Models.Employee;
     using Task = System.Threading.Tasks.Task;
@@ -12,7 +11,7 @@
     {
         private readonly IRepository repo;
 
-        public EmployeeService(IRepository _repo, ApplicationDbContext _data)
+        public EmployeeService(IRepository _repo)
         {
             repo = _repo;
         }

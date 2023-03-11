@@ -1,13 +1,14 @@
-﻿namespace EmployeeTasks.Data.Entities
-{
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using static Constants.Task;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using static EmployeeTasks.Data.Constants.Task;
 
-    public class Task
+
+namespace EmployeeTasks.Models.Task
+{
+    using Data.Entities;
+
+    public class TaskModel
     {
-        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -24,10 +25,7 @@
         public DateTime DueDate { get; set; }
 
         public int? AssigneeId { get; set; }
-
-        [ForeignKey(nameof(AssigneeId))]
+        
         public Employee? Assignee { get; set; }
-
-        public bool IsActive { get; set; } = true;
     }
 }
