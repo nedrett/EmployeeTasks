@@ -40,6 +40,7 @@ namespace EmployeeTasks.Services
                 Title = model.Title,
                 Description = model.Description,
                 DueDate = model.DueDate,
+                AssigneeId = model.AssigneeId
             };
 
             await repo.AddAsync(taskItem);

@@ -18,7 +18,7 @@
 
         public async Task<IEnumerable<EmployeeModel>> GetAll()
         {
-            var allEmployees = await repo.AllReadonly<Employee>()
+            return await repo.AllReadonly<Employee>()
                 .Where(e => e.IsActive)
                 .Select(e => new EmployeeModel
                 {
@@ -30,8 +30,13 @@
                     Salary = e.Salary,
                     CompletedTasks = new List<Data.Entities.Task>()
                 }).ToListAsync();
-            
-            return allEmployees;
+        }
+
+        public async Task<IEnumerable<Employee>> GetAllEmployees()
+        {
+            return await repo.AllReadonly<Employee>()
+                .Where(e => e.IsActive)
+                .ToListAsync();
         }
 
         public async Task Add(EmployeeModel model)
@@ -58,7 +63,8 @@
                 .Where(e => e.Id == id)
                 .Select(e => new EmployeeModel
                 {
-                    Id = e.Id, FullName = e.FullName,
+                    Id = e.Id,
+                    FullName = e.FullName,
                     EmailAddress = e.EmailAddress,
                     PhoneNumber = e.PhoneNumber,
                     BirthDate = e.BirthDate,

@@ -25,6 +25,12 @@
                 <input asp-for="DueDate" class="form-control" placeholder="Enter Phone Number">
                 <span asp-validation-for="DueDate" class="small text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="AssigneeId">Set Assigned Employee</label>
+                <select class="form-select" asp-items="Model.Employees" asp-for="AssigneeId">
+                <option selected disabled>--Select Employee--</option>
+                </select>
+            </div>
             <div class="text-center">
                 <input class="btn btn-primary mt-3" type="submit" value="Add" />
             </div>

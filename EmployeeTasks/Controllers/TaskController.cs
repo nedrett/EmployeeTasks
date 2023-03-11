@@ -1,18 +1,24 @@
 ﻿namespace EmployeeTasks.Controllers
 {
     using Contracts;
+    using Data.Entities;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using Models.Task;
 
     [AllowAnonymous]
     public class TaskController : Controller
     {
         private readonly ITaskService taskService;
+        private readonly IEmployeeService employeeService;
 
-        public TaskController(ITaskService _taskService)
+        public TaskController(
+            ITaskService _taskService,
+            IEmployeeService _employeeService)
         {
             taskService = _taskService;
+            employeeService = _employeeService;
         }
 
         public async Task<IActionResult> All()
@@ -28,9 +34,16 @@
         }
 
         [HttpGet]
-        public IActionResult Add()
+        public async Task<IActionResult> Add()
         {
             var model = new TaskModel();
+
+            IEnumerable<Employee> employees = await employeeService.GetAllEmployees();
+
+            foreach (var employee in employees)
+            {
+                model.Employees.Add(new SelectListItem { Text = employee.FullName, Value = employee.Id.ToString()});
+            }
 
             return View(model);
         }
@@ -67,6 +80,13 @@
                 AssigneeId = task.AssigneeId,
                 Assignee = task.Assignee,
             };
+
+            IEnumerable<Employee> employees = await employeeService.GetAllEmployees();
+
+            foreach (var employee in employees)
+            {
+                model.Employees.Add(new SelectListItem { Text = employee.FullName, Value = employee.Id.ToString() });
+            }
 
             return View(model);
         }

@@ -6,6 +6,7 @@ using static EmployeeTasks.Data.Constants.Task;
 namespace EmployeeTasks.Models.Task
 {
     using Data.Entities;
+    using Microsoft.AspNetCore.Mvc.Rendering;
 
     public class TaskModel
     {
@@ -27,5 +28,7 @@ namespace EmployeeTasks.Models.Task
         public int? AssigneeId { get; set; }
         
         public Employee? Assignee { get; set; }
+
+        public List<SelectListItem> Employees { get; set; } = new List<SelectListItem>();
     }
 }
