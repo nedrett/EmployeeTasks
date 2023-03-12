@@ -19,12 +19,14 @@
         {
             IEnumerable<EmployeeModel> allEmployees = await employeeService.GetAll();
 
-            if (allEmployees == null)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
             return View(allEmployees);
+        }
+
+        public async Task<IActionResult> Top5()
+        {
+            IEnumerable<EmployeeModel> top5Employees = await employeeService.GetTop5Employees();
+
+            return View(top5Employees);
         }
 
         [HttpGet]

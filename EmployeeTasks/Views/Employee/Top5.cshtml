@@ -1,0 +1,49 @@
+﻿@model IEnumerable<EmployeeModel>
+
+@{
+    ViewBag.Title = "Eployees with Highest Number Tasks Done";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<table class="table table-striped">
+    @if (Model.Any())
+    {
+        <thead>
+            <tr>
+                <th><label>Full Name</label></th>
+                <th><label>Email</label></th>
+                <th><label>Phone Number</label></th>
+                <th><label>Date of Birth</label></th>
+                <th><label>Salary</label></th>
+                <th><label>Tasks Completed</label></th>
+                <th><label>Actions</label></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in Model)
+            {
+                <tr>
+                    <td><label>@employee.FullName</label></td>
+                    <td><label>@employee.EmailAddress</label></td>
+                    <td><label>@employee.PhoneNumber</label></td>
+                    <td><label>@employee.BirthDate.ToShortDateString()</label></td>
+                    <td><label>@employee.Salary</label></td>
+                    <td><label>@employee.CompletedTasksCount</label></td>
+                    <td>
+                        <a class="btn btn-warning" asp-controller="Employee" asp-action="Edit" asp-route-id="@employee.Id">Edit</a>
+                        <form asp-controller="Employee" asp-action="Delete" method="post" asp-route-id="@employee.Id" onclick="return confirm('Are You sure to delete @employee.FullName')">
+                            <input name="id" type="hidden" value="@employee.Id" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    }
+    else
+    {
+        <h3 class="text-center">No any Employees Added</h3>
+    }
+</table>

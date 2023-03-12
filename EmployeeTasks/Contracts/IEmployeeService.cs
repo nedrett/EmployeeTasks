@@ -8,8 +8,10 @@
     {
         Task<IEnumerable<EmployeeModel>> GetAll();
 
+        Task<IEnumerable<EmployeeModel>> GetTop5Employees();
+
         Task<IEnumerable<Employee>> GetAllEmployees();
-        
+
         Task Add(EmployeeModel model);
 
         Task<EmployeeModel> GetById(int id); 

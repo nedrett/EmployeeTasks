@@ -32,6 +32,25 @@
                 }).ToListAsync();
         }
 
+        public async Task<IEnumerable<EmployeeModel>> GetTop5Employees()
+        {
+            return await repo.AllReadonly<Employee>()
+                .Where(e => e.IsActive)
+                .Select(e => new EmployeeModel
+                {
+                    Id = e.Id,
+                    FullName = e.FullName,
+                    EmailAddress = e.EmailAddress,
+                    PhoneNumber = e.PhoneNumber,
+                    BirthDate = e.BirthDate,
+                    Salary = e.Salary,
+                    CompletedTasksCount = e.CompletedTasksCount
+                })
+                .OrderByDescending(e => e.CompletedTasksCount)
+                .Take(5)
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<Employee>> GetAllEmployees()
         {
             return await repo.AllReadonly<Employee>()
