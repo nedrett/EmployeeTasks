@@ -25,7 +25,7 @@ namespace EmployeeTasks.Models.Task
         [DisplayName("Due Date")]
         public DateTime DueDate { get; set; }
 
-        public int? AssigneeId { get; set; }
+        public int AssigneeId { get; set; }
         
         public Employee? Assignee { get; set; }
 

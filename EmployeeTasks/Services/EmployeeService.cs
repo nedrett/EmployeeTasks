@@ -28,7 +28,7 @@
                     PhoneNumber = e.PhoneNumber,
                     BirthDate = e.BirthDate,
                     Salary = e.Salary,
-                    CompletedTasks = new List<Data.Entities.Task>()
+                    CompletedTasksCount = e.CompletedTasksCount
                 }).ToListAsync();
         }
 
@@ -49,7 +49,7 @@
                 PhoneNumber = model.PhoneNumber,
                 BirthDate = model.BirthDate,
                 Salary = model.Salary,
-                CompletedTasks = model.CompletedTasks
+                CompletedTasksCount = model.CompletedTasksCount
             };
 
             await repo.AddAsync(employeeItem);
@@ -69,7 +69,7 @@
                     PhoneNumber = e.PhoneNumber,
                     BirthDate = e.BirthDate,
                     Salary = e.Salary,
-                    CompletedTasks = new List<Data.Entities.Task>()
+                    CompletedTasksCount = e.CompletedTasksCount
                 })
                 .FirstAsync();
         }
@@ -84,7 +84,7 @@
             employee.PhoneNumber = model.PhoneNumber;
             employee.BirthDate = model.BirthDate;
             employee.Salary = model.Salary;
-            employee.CompletedTasks = model.CompletedTasks;
+            employee.CompletedTasksCount = model.CompletedTasksCount;
 
             await repo.SaveChangesAsync();
         }

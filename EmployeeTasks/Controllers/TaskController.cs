@@ -1,6 +1,7 @@
 ﻿namespace EmployeeTasks.Controllers
 {
     using Contracts;
+    using Data.Common;
     using Data.Entities;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -108,6 +109,21 @@
         public async Task<IActionResult> Delete([FromForm] int id)
         {
             await taskService.Delete(id);
+
+            return RedirectToAction(nameof(All));
+        }
+
+        public async Task<IActionResult> TaskDone(int id)
+        {
+            var taskDone = await taskService.GetTaskById(id);
+
+            var assignedEmployee = await employeeService.GetById(taskDone.AssigneeId);
+
+            assignedEmployee.CompletedTasksCount++;
+
+            await employeeService.Edit(assignedEmployee.Id, assignedEmployee);
+
+            await Delete(id);
 
             return RedirectToAction(nameof(All));
         }

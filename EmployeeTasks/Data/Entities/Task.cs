@@ -23,10 +23,10 @@
         [DisplayName("Due Date")]
         public DateTime DueDate { get; set; }
 
-        public int? AssigneeId { get; set; }
+        public int AssigneeId { get; set; }
 
         [ForeignKey(nameof(AssigneeId))]
-        public Employee? Assignee { get; set; }
+        public Employee Assignee { get; set; }
 
         public bool IsActive { get; set; } = true;
     }

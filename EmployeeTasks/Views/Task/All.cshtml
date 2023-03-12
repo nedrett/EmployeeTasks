@@ -17,6 +17,7 @@
                 <th><label>Due Date</label></th>
                 <th><label>Assignee Name</label></th>
                 <th><label>Actions</label></th>
+                <th><label>Task Done</label></th>
             </tr>
         </thead>
         <tbody>
@@ -33,6 +34,9 @@
                             <input name="id" type="hidden" value="@task.Id" />
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-controller="Task" asp-action="TaskDone" asp-route-id="@task.Id" onclick="return confirm('Are You sure to mark as Done @task.Title')">Done</a>
                     </td>
                 </tr>
             }

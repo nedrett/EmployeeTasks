@@ -30,7 +30,7 @@
                     <td><label>@employee.PhoneNumber</label></td>
                     <td><label>@employee.BirthDate.ToShortDateString()</label></td>
                     <td><label>@employee.Salary</label></td>
-                    <td><label>@employee.CompletedTasks.Count()</label></td>
+                    <td><label>@employee.CompletedTasksCount</label></td>
                     <td>
                         <a class="btn btn-warning" asp-controller="Employee" asp-action="Edit" asp-route-id="@employee.Id">Edit</a>
                         <form asp-controller="Employee" asp-action="Delete" method="post" asp-route-id="@employee.Id" onclick="return confirm('Are You sure to delete @employee.FullName')">

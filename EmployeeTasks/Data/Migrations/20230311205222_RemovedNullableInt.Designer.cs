@@ -4,6 +4,7 @@ using EmployeeTasks.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmployeeTasks.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230311205222_RemovedNullableInt")]
+    partial class RemovedNullableInt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,9 +34,6 @@ namespace EmployeeTasks.Data.Migrations
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("CompletedTasksCount")
-                        .HasColumnType("int");
 
                     b.Property<string>("EmailAddress")
                         .IsRequired()
@@ -302,7 +301,7 @@ namespace EmployeeTasks.Data.Migrations
             modelBuilder.Entity("EmployeeTasks.Data.Entities.Task", b =>
                 {
                     b.HasOne("EmployeeTasks.Data.Entities.Employee", "Assignee")
-                        .WithMany()
+                        .WithMany("CompletedTasks")
                         .HasForeignKey("AssigneeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -359,6 +358,11 @@ namespace EmployeeTasks.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("EmployeeTasks.Data.Entities.Employee", b =>
+                {
+                    b.Navigation("CompletedTasks");
                 });
 #pragma warning restore 612, 618
         }

@@ -64,6 +64,14 @@ namespace EmployeeTasks.Services
                 .FirstAsync();
         }
 
+        public async Task<Data.Entities.Task> GetTaskById(int id)
+        {
+            return await repo.AllReadonly<Data.Entities.Task>()
+                .Where(t => t.IsActive)
+                .Where(t => t.Id == id)
+                .FirstAsync();
+        }
+
 
         public async Task Edit(int id, TaskModel model)
         {

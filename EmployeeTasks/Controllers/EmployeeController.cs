@@ -66,7 +66,7 @@
                 PhoneNumber = employee.PhoneNumber,
                 BirthDate = employee.BirthDate,
                 Salary = employee.Salary,
-                CompletedTasks = employee.CompletedTasks
+                CompletedTasksCount = employee.CompletedTasksCount
             };
 
             return View(model);

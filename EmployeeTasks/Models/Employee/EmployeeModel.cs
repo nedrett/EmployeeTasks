@@ -37,6 +37,6 @@ namespace EmployeeTasks.Models.Employee
         [Precision(18, 2)]
         public decimal Salary { get; set; }
 
-        public IEnumerable<Task> CompletedTasks { get; set; } = new List<Task>();
+        public int CompletedTasksCount { get; set; }
     }
 }
